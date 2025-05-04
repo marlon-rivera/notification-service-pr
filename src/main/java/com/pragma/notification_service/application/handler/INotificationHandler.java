@@ -5,5 +5,6 @@ import com.pragma.notification_service.application.dto.request.NotificationSendD
 public interface INotificationHandler {
 
     void sendConfirmationCode(NotificationSendDto notificationSendDto);
+    boolean validateConfirmationCode(Long idOrder, String code);
 
 }

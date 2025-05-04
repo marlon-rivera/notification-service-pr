@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NotificationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">notification-service</a> &gt; <a href="index.source.html" class="el_package">com.pragma.notification_service.infrastructure.input.rest</a> &gt; <span class="el_source">NotificationController.java</span></div><h1>NotificationController.java</h1><pre class="source lang-java linenums">package com.pragma.notification_service.infrastructure.input.rest;
+
+import com.pragma.notification_service.application.dto.request.NotificationSendDto;
+import com.pragma.notification_service.application.dto.request.ValidateCodeDto;
+import com.pragma.notification_service.application.dto.utils.constants.ResponsesCodes;
+import com.pragma.notification_service.application.handler.INotificationHandler;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import com.pragma.notification_service.infrastructure.utils.constants.openapi.NotificationControllerOpenApiConstants;
+
+@RestController
+@RequestMapping(&quot;/notification&quot;)
+@RequiredArgsConstructor
+public class NotificationController {
+
+    private final INotificationHandler notificationHandler;
+
+    @Operation(
+            summary = NotificationControllerOpenApiConstants.SEND_CONFIRMATION_CODE_SUMMARY,
+            description = NotificationControllerOpenApiConstants.SEND_CONFIRMATION_CODE_DESCRIPTION,
+            responses = {
+                    @ApiResponse(
+                            responseCode = ResponsesCodes.OK,
+                            description = NotificationControllerOpenApiConstants.SEND_CONFIRMATION_CODE_RESPONSE_200_DESCRIPTION
+                    ),
+                    @ApiResponse(
+                            responseCode = ResponsesCodes.BAD_REQUEST,
+                            description = NotificationControllerOpenApiConstants.SEND_CONFIRMATION_CODE_RESPONSE_400_DESCRIPTION
+                    )
+            }
+    )
+    @PostMapping
+    public ResponseEntity&lt;Void&gt; sendConfirmationCode(@Valid @RequestBody NotificationSendDto notificationSendDto) {
+<span class="fc" id="L38">        notificationHandler.sendConfirmationCode(notificationSendDto);</span>
+<span class="fc" id="L39">        return ResponseEntity.ok().build();</span>
+    }
+
+    @Operation(
+            summary = NotificationControllerOpenApiConstants.VALIDATE_CONFIRMATION_CODE_SUMMARY,
+            description = NotificationControllerOpenApiConstants.VALIDATE_CONFIRMATION_CODE_DESCRIPTION,
+            responses = {
+                    @ApiResponse(
+                            responseCode = ResponsesCodes.OK,
+                            description = NotificationControllerOpenApiConstants.VALIDATE_CONFIRMATION_CODE_RESPONSE_200_DESCRIPTION
+                    ),
+                    @ApiResponse(
+                            responseCode = ResponsesCodes.BAD_REQUEST,
+                            description = NotificationControllerOpenApiConstants.VALIDATE_CONFIRMATION_CODE_RESPONSE_400_DESCRIPTION
+                    )
+            }
+    )
+    @PostMapping(&quot;/validate&quot;)
+    public ResponseEntity&lt;Boolean&gt; validateConfirmationCode(
+            @RequestBody @Valid ValidateCodeDto validateCodeDto
+    ) {
+<span class="fc" id="L60">        return ResponseEntity.ok(notificationHandler.validateConfirmationCode(</span>
+<span class="fc" id="L61">                validateCodeDto.getIdOrder(),</span>
+<span class="fc" id="L62">                validateCodeDto.getCode()</span>
+        ));
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

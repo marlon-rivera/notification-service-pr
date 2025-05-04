@@ -11,6 +11,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Random;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -135,5 +137,51 @@ class NotificationUseCaseTest {
                 anyString(),
                 eq(String.valueOf(expectedCode))
         );
+    }
+
+    @Test
+    void shouldReturnTrueWhenCodeMatches() {
+        // Given
+        Long idOrder = 1L;
+        String code = "123456";
+        when(notificationPersistencePort.getConfirmationCode(idOrder)).thenReturn(code);
+
+        // When
+        boolean result = notificationUseCase.validateConfirmationCode(idOrder, code);
+
+        // Then
+        verify(notificationPersistencePort).getConfirmationCode(idOrder);
+        assertTrue(result);
+    }
+
+    @Test
+    void shouldReturnFalseWhenCodeDoesNotMatch() {
+        // Given
+        Long idOrder = 1L;
+        String storedCode = "123456";
+        String providedCode = "654321";
+        when(notificationPersistencePort.getConfirmationCode(idOrder)).thenReturn(storedCode);
+
+        // When
+        boolean result = notificationUseCase.validateConfirmationCode(idOrder, providedCode);
+
+        // Then
+        verify(notificationPersistencePort).getConfirmationCode(idOrder);
+        assertFalse(result);
+    }
+
+    @Test
+    void shouldReturnFalseWhenNoCodeFound() {
+        // Given
+        Long idOrder = 1L;
+        String code = "123456";
+        when(notificationPersistencePort.getConfirmationCode(idOrder)).thenReturn(null);
+
+        // When
+        boolean result = notificationUseCase.validateConfirmationCode(idOrder, code);
+
+        // Then
+        verify(notificationPersistencePort).getConfirmationCode(idOrder);
+        assertFalse(result);
     }
 }

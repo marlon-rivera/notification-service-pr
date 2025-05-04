@@ -17,4 +17,9 @@ public class NotificationHandler implements INotificationHandler {
                 notificationSendDto.getPhoneNumber()
         );
     }
+
+    @Override
+    public boolean validateConfirmationCode(Long idOrder, String code) {
+        return notificationServicePort.validateConfirmationCode(idOrder, code);
+    }
 }
