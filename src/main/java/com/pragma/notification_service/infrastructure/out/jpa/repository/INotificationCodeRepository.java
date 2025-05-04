@@ -6,5 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface INotificationCodeRepository extends JpaRepository<NotificationCodeEntity, Long> {
 
     NotificationCodeEntity findByIdOrder(Long idOrder);
-
 }
