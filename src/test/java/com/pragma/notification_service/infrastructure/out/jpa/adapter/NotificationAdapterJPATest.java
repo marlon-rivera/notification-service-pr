@@ -74,4 +74,19 @@ class NotificationAdapterJPATest {
         }
     }
 
+    @Test
+    void getConfirmationCode_shouldReturnCodeFromRepository() {
+        // Arrange
+        NotificationCodeEntity notificationCodeEntity = new NotificationCodeEntity();
+        notificationCodeEntity.setConfirmationCode(code);
+        when(notificationCodeRepository.findByIdOrder(orderId)).thenReturn(notificationCodeEntity);
+
+        // Act
+        String result = notificationAdapterJPA.getConfirmationCode(orderId);
+
+        // Assert
+        verify(notificationCodeRepository).findByIdOrder(orderId);
+        assertEquals(code, result);
+    }
+
 }

@@ -31,6 +31,15 @@ public class NotificationUseCase implements INotificationServicePort {
         notificationPersistencePort.sendNotification(idOrder, phoneNumber, message, code);
     }
 
+    @Override
+    public boolean validateConfirmationCode(Long idOrder, String code) {
+        String confirmationCode = notificationPersistencePort.getConfirmationCode(idOrder);
+        if (confirmationCode == null) {
+            return false;
+        }
+        return confirmationCode.equals(code);
+    }
+
     private int generateConfirmationCode() {
         return NotificationUseCaseConstants.MIN_CONFIRMATION_CODE +
                 random.nextInt(NotificationUseCaseConstants.MAX_CONFIRMATION_CODE);

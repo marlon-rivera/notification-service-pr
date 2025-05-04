@@ -26,4 +26,9 @@ public class NotificationAdapterJPA implements INotificationPersistencePort {
                 message
         ).create();
     }
+
+    @Override
+    public String getConfirmationCode(Long idOrder) {
+        return notificationCodeRepository.findByIdOrder(idOrder).getConfirmationCode();
+    }
 }

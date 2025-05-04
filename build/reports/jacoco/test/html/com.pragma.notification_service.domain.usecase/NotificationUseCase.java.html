@@ -31,9 +31,18 @@ public class NotificationUseCase implements INotificationServicePort {
 <span class="fc" id="L31">        notificationPersistencePort.sendNotification(idOrder, phoneNumber, message, code);</span>
 <span class="fc" id="L32">    }</span>
 
+    @Override
+    public boolean validateConfirmationCode(Long idOrder, String code) {
+<span class="fc" id="L36">        String confirmationCode = notificationPersistencePort.getConfirmationCode(idOrder);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        if (confirmationCode == null) {</span>
+<span class="fc" id="L38">            return false;</span>
+        }
+<span class="fc" id="L40">        return confirmationCode.equals(code);</span>
+    }
+
     private int generateConfirmationCode() {
-<span class="fc" id="L35">        return NotificationUseCaseConstants.MIN_CONFIRMATION_CODE +</span>
-<span class="fc" id="L36">                random.nextInt(NotificationUseCaseConstants.MAX_CONFIRMATION_CODE);</span>
+<span class="fc" id="L44">        return NotificationUseCaseConstants.MIN_CONFIRMATION_CODE +</span>
+<span class="fc" id="L45">                random.nextInt(NotificationUseCaseConstants.MAX_CONFIRMATION_CODE);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

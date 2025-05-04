@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2025-05-04T02:43:39.873Z" hostname="MARLON-RIVERA" time="0.786">
+<testsuite name="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2025-05-04T04:58:35.109Z" hostname="MARLON-RIVERA" time="0.603">
   <properties/>
-  <testcase name="shouldSendConfirmationCodeWithCorrectFormat()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.742"/>
-  <testcase name="shouldGenerateConfirmationCodeInValidRange()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.011"/>
-  <testcase name="shouldSendConfirmationCodeWithCorrectFormatWhenPhoneNumberWithoutPlus()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.008"/>
-  <testcase name="shouldSendConfirmationCodeWithCorrectFormatWhenPhoneNumberWithoutIndicative()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.008"/>
-  <testcase name="shouldNotModifyPhoneNumberWhenAlreadyFormattedCorrectly()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.008"/>
+  <testcase name="shouldReturnTrueWhenCodeMatches()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.537"/>
+  <testcase name="shouldReturnFalseWhenNoCodeFound()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.006"/>
+  <testcase name="shouldSendConfirmationCodeWithCorrectFormat()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.029"/>
+  <testcase name="shouldGenerateConfirmationCodeInValidRange()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.006"/>
+  <testcase name="shouldSendConfirmationCodeWithCorrectFormatWhenPhoneNumberWithoutPlus()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.005"/>
+  <testcase name="shouldReturnFalseWhenCodeDoesNotMatch()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.003"/>
+  <testcase name="shouldSendConfirmationCodeWithCorrectFormatWhenPhoneNumberWithoutIndicative()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.005"/>
+  <testcase name="shouldNotModifyPhoneNumberWhenAlreadyFormattedCorrectly()" classname="com.pragma.notification_service.domain.usecase.NotificationUseCaseTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
